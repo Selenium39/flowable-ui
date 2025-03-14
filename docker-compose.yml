@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  flowable-ui:
+    image: flowable/flowable-ui
+    container_name: flowable-ui
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./flowable-default.properties:/app/WEB-INF/classes/flowable-default.properties
+      - ./mysql-connector-java-8.0.27.jar:/app/WEB-INF/lib/mysql-connector-java-8.0.27.jar
+  mysql:
+    image: mysql:5.7
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: flowable
+    restart: always
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql
